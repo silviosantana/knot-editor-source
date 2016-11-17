@@ -1,0 +1,46 @@
+body
+{
+	font-family: Verdana;
+	font-size: 13px;
+	background: #eee;
+}
+
+h1
+{
+	color:#62A943;
+}
+
+h2
+{
+	color: red;
+}
+
+input
+{
+	width: 25%;
+	padding: 10px ;
+}
+
+input:focus		/*cria a borda quando cursor está na input*/
+{
+	border: 3px solid #62A943;
+}
+
+::-webkit-input-placeholder
+{
+	color:#62A943;
+	font-size: 15px;
+}
+
+button
+{
+	background-color: #62A943;
+	border: none;
+	color: white;
+	padding: 10px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 5px;
+}

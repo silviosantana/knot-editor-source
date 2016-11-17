@@ -1,0 +1,11 @@
+To install dependencies:
+npm install
+
+To execute :
+npm start
+
+Server running at:
+localhost:3000
+
+MonogoDB should be up and running at "mongodb://localhost:27017/test"
+before running server.
