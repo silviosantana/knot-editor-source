@@ -52,7 +52,7 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-// development error handler
+/*// development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
@@ -62,6 +62,6 @@ if (app.get('env') === 'development') {
             error: err
         });
     });
-}
+}*/
 
 module.exports = app;

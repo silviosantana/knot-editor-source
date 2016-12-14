@@ -5,13 +5,15 @@ var bCrypt = require('bcrypt-nodejs');
 module.exports = function(passport){
 
 	passport.use('signup', new LocalStrategy({
+            usernameField : 'email',
+            passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
-        function(req, username, password, done) {
+        function(req, email, password, done) {
 
             findOrCreateUser = function(){
                 // find a user in Mongo with provided username
-                User.findOne({ 'username' :  username }, function(err, user) {
+                User.findOne({ 'email' :  email }, function(err, user) {
                     // In case of any error, return using the done method
                     if (err){
                         console.log('Error in SignUp: '+err);
@@ -19,7 +21,7 @@ module.exports = function(passport){
                     }
                     // already exists
                     if (user) {
-                        console.log('User already exists with username: '+username);
+                        console.log('User already exists with email: '+email);
                         return done(null, false, req.flash('message','User Already Exists'));
                     } else {
                         // if there is no user with that email
@@ -28,7 +30,7 @@ module.exports = function(passport){
 
                         // set the user's local credentials
                         newUser.username = req.body.username;
-                        newUser.password = createHash(req.body.password);
+                        newUser.local.password = createHash(req.body.password);
                         newUser.email = req.body.email;
                         newUser.phone = req.body.phone;
 

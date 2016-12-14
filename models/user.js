@@ -2,9 +2,17 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('User',{
-	id: String,
+	//id: String,
 	username: String,
-	password: String,
-	email: String,
 	phone: String,
+    email: String,
+
+	local            : {
+        password     : String,
+    },
+    google           : {
+        id           : String,
+        token        : String,
+    }
+
 });

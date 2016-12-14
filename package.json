@@ -15,12 +15,13 @@
     "mongoose": "~3.8.12",
     "morgan": "^1.7.0",
     "passport": "~0.2.0",
+    "passport-google-oauth": "^1.0.0",
     "passport-local": "~1.0.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node ./bin/www"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",

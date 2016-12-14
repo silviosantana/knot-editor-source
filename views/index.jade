@@ -8,12 +8,15 @@ html
 			img(src="http://knot.cesar.org.br/images/KNoT_logo_topo1.png")
 			h1 Knot Editor
 			form(class='form-signin', action='/login', method='POST')
-				input(type='text', name='username', class='form-control' ,placeholder='Username',required, autofocus)
+				input(type='email', name='email', class='form-control' ,placeholder='Email',required, autofocus)
 				br
 				input(type='password', name='password', class='form-control', placeholder='Password', required,autofocus)
 				br
 				button(class='btn btn-lg btn-primary btn-block', type='submit') Sign in
 				span.clearfix
+
+			a(href='/auth/google', class='text-center new-account') Google
+			br
 			a(href='/signup', class='text-center new-account') Create an account
 
 

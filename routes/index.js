@@ -13,10 +13,6 @@ var isAuthenticated = function (req, res, next) {
 	res.redirect('/');
 }
 
-var isValidPassword = function(user, password){
-    return bCrypt.compareSync(password, user.password);
-}
-
 module.exports = function(passport){
 
 	//GET login page
@@ -29,6 +25,16 @@ module.exports = function(passport){
 		successRedirect: '/user',
 	    failureRedirect: '/' 
 	}));
+
+
+	//handle GOOGLE sign in
+	router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+	// the callback after google has authenticated the user
+    router.get('/auth/google/callback', passport.authenticate('google', {
+        successRedirect : '/user',
+        failureRedirect : '/'
+    }));
 
 	//GET registration Page
 	router.get('/signup',function (req,res) {
@@ -53,16 +59,12 @@ module.exports = function(passport){
 
 	//Handle delete user POST
 	router.post('/delete_user',function (req,res) {
-		if (isValidPassword(req.user,req.body.password)) {
-			User.remove({username:req.user.username},function (err, result) {
-	            if (err) return console.log(err)
-	                res.end(JSON.stringify(result))
-	            })
-			res.redirect('/');
-		}
-		else{
-			res.send('Senha incorreta');
-		};
+		User.remove({username:req.user.username},function (err, result) {
+            if (err) return console.log(err)
+                res.end(JSON.stringify(result))
+            })
+		req.logout();
+		res.redirect('/');
 	});
 
 	//GET update user info page
@@ -79,14 +81,14 @@ module.exports = function(passport){
 			req.body.phone = req.user.phone;
 		}
 
-		if (req.body.email == ''){
-			req.body.email = req.user.email;
+		if (req.body.username == ''){
+			req.body.username = req.user.username;
 		}
 		
-		User.update({username:req.user.username},
+		User.update({'email':req.user.email},
 		{
 			$set:{
-				email: req.body.email,
+				username: req.body.username,
 				phone: req.body.phone
 			}
 		},function (err, result) {
